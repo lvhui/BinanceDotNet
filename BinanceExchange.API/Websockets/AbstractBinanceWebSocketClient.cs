@@ -138,6 +138,15 @@ namespace BinanceExchange.API.Websockets
             return CreateBinanceWebSocket(endpoint, messageEventHandler);
         }
 
+        public Guid ConnectToTradesWebSocketCombined(string symbols, BinanceWebSocketMessageHandler<BinanceCombinedAggregateTradeData> messageEventHandler)
+        {
+            Guard.AgainstNullOrEmpty(symbols, nameof(symbols));
+            symbols = PrepareCombinedSymbols.CombinedAggTrade(symbols);
+            Logger.Debug("Connecting to Combined AggTrade Socket");
+            var endpoint = new Uri($"{CombinedWebsocketUri}={symbols}");
+            return CreateBinanceWebSocket(endpoint, messageEventHandler);
+        }
+
         /// <summary>
         /// Connect to the Individual Symbol Ticker WebSocket
         /// </summary>

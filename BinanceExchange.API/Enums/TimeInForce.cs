@@ -4,5 +4,6 @@
     {
         GTC,
         IOC,
+        FOK
     }
 }
